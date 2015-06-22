@@ -1,4 +1,4 @@
-library akepot.model.model_project;
+library test_arrays_binding.model_project;
 
 import 'package:polymer/polymer.dart';
 import "dart:core" as core;

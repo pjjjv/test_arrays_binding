@@ -8,7 +8,7 @@ class SectionEditProject extends PolymerElement {
   SectionEditProject.created() : super.created() {
   }
 
-  @observable Project project;
+  @published Project project;
   @published int index;
 
   void domReady() {
