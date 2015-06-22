@@ -1,0 +1,36 @@
+<link rel="import" href="../../packages/polymer/polymer.html">
+<link rel="import" href="../../packages/core_elements/core_icon.html">
+<link rel="import" href="../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../packages/paper_elements/paper_input_decorator.html">
+<link rel="import" href="../../packages/paper_elements/paper_autogrow_textarea.html">
+<link rel="import" href="../../packages/paper_elements/paper_action_dialog.html">
+<link rel="import" href="../../packages/paper_elements/paper_button.html">
+<link rel="import" href="../../packages/core_elements/core_ajax_dart.html">
+<link rel="import" href="../../packages/core_elements/core_signals.html">
+<link rel="import" href="../../packages/core_elements/core_animated_pages.html">
+<link rel="import" href="../../packages/core_elements/core_icon_button.html">
+<link rel="import" href="../../packages/core_elements/core_toolbar.html">
+<link rel="import" href="../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../packages/paper_elements/paper_tabs.html">
+<link rel="import" href="../../packages/paper_elements/paper_tab.html">
+<link rel="import" href="section_edit_project.html">
+<link rel="import" href="section_edit_category.html">
+
+<polymer-element name="pane-edit" attributes="project category_nr subcategory_nr">
+  <template>
+
+        <paper-button on-tap="{{onCycle}}">Cycle</paper-button><br />
+        <paper-button on-tap="{{addCategory}}">Add category</paper-button><br />
+        <paper-button on-tap="{{addSubCategory}}">Add subcategory</paper-button><br />
+
+        <section-edit-project project="{{project}}" index="{{category_nr}}"></section-edit-project><br /><br /><br />
+
+        <template if="{{ project.categories.length != 0 && project.categories[category_nr] != null }}">
+          <section-edit-category category="{{project.categories[category_nr]}}" index="{{subcategory_nr}}"></section-edit-category>
+
+        </template>
+  </template>
+
+  <script type="application/dart" src="pane_edit.dart"></script>
+</polymer-element>
+

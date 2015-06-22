@@ -1,0 +1,20 @@
+<link rel="import" href="../../packages/polymer/polymer.html">
+<link rel="import" href="../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../packages/core_elements/core_icon_button.html">
+<link rel="import" href="../../packages/core_elements/core_toolbar.html">
+<link rel="import" href="../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../packages/paper_elements/paper_fab.html">
+
+<polymer-element name="section-edit-category" attributes="category index">
+  <template>
+
+SUBCATEGORIES<br />
+{{index}}<br />
+          <template repeat="{{subcategory in category.subcategories | enumerate}}">
+            {{subcategory.index}}. {{subcategory.value}}<br />
+          </template><br /><br />
+  </template>
+
+  <script type="application/dart" src="section_edit_category.dart"></script>
+</polymer-element>
+
