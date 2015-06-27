@@ -6,10 +6,10 @@ import 'dart:html';
 @CustomTag("pane-edit")
 class PaneEdit extends PolymerElement {
   PaneEdit.created() : super.created() {
-    Category cat = new Category(0, "catA", []);
-    cat.subcategories.add("subcatA");
-    project = new Project.create("bla");
-    project.categories.add(cat);
+    Category cat = toObservable(new Category(0, "catA", toObservable([])));
+    cat.subcategories.add(toObservable("subcatA"));
+    project = toObservable(new Project.create("bla"));
+    project.categories.add(toObservable(cat));
   }
 
   @observable Project project;
@@ -23,18 +23,18 @@ class PaneEdit extends PolymerElement {
 
 
   void addCategory(Event e, var detail, Node target){
-    project.categories.add(new Category.create());
+    project.categories.add(toObservable(new Category.create()));
   }
 
   void onCycle(Event e, var detail, Node target){
-    subcategory_nr++;
-    if (subcategory_nr >= project.categories[category_nr].subcategories.length){
-      subcategory_nr = 0;
+    category_nr++;
+    if (category_nr >= project.categories.length){
+      category_nr = 0;
     }
   }
 
   void addSubCategory(Event e, var detail, Node target){
-    project.categories[category_nr].subcategories.add("subcatNew");
+    project.categories[category_nr].subcategories.add(toObservable("subcatNew"));
   }
 
 }

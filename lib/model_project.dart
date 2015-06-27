@@ -13,12 +13,12 @@ class Project extends Observable {
   @observable core.String name = "New Project";
 
   /** Not documented yet. */
-  @observable core.List<Category> categories = [];
+  @observable core.List<Category> categories = toObservable([]);
 
 
   Project(this.hash, this.name, this.categories);
 
-  Project.create(hash) : hash = hash, name = "New Project",categories = [];
+  Project.create(hash) : hash = hash, name = "New Project",categories = toObservable([]);
 
 
   toString() => name;
@@ -35,10 +35,10 @@ class Category extends Observable {
   core.String name = "New category";
 
   /** Not documented yet. */
-  @observable core.List<core.String> subcategories = [];
+  @observable core.List<core.String> subcategories = toObservable([]);
 
   Category(this.id, this.name, this.subcategories);
-  Category.create() : id = null, name = "New", subcategories = [];
+  Category.create() : id = null, name = "New", subcategories = toObservable([]);
 
   toString() => name;
 
