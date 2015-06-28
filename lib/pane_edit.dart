@@ -16,7 +16,8 @@ class PaneEdit extends PolymerElement {
     Firebase dbRef = new Firebase("https://shining-heat-1634.firebaseio.com/");
 
     dbRef.child("project").onValue.listen((e) {
-      project = new ProjectImpl.fromJsonString(e.snapshot.valAsJson());
+      Map val = e.snapshot.val();
+      project = new Project.fromJsonString(val);
     });
   }
 

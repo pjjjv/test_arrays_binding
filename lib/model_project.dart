@@ -1,60 +1,60 @@
 library test_arrays_binding.model_project;
 
 import 'package:polymer/polymer.dart';
-import "dart:core" as core;
-import "package:json_object/json_object.dart";
-
-abstract class Project extends Observable {
-  /** Not documented yet. */
-  @observable core.String hash;
-
-  /** Not documented yet. */
-  @observable core.String name = "New Project";
-
-  /** Not documented yet. */
-  @observable core.List<Category> categories = toObservable([]);
-}
-
+import 'package:dartson/dartson.dart';
 
 /** Not documented yet. */
-class ProjectImpl extends JsonObject with Observable implements Project{
+@Entity()
+class Project extends Observable{
+  /** Not documented yet. */
+  @observable String hash;
 
-  ProjectImpl();
+  /** Not documented yet. */
+  @observable String name = "New Project";
 
-  ProjectImpl.full(this.hash, this.name, this.categories);
+  /** Not documented yet. */
+  List<Category> _categories = toObservable([]);
+  List<Category> get categories => _categories;
+  void set categories(List<Category> value) {
+    this._categories = notifyPropertyChange(const Symbol('categories'), this._categories, toObservable(value));
+  }
 
-  ProjectImpl.create(hash) : hash = hash, name = "New Project",categories = toObservable([]);
+  Project(this.hash, this.name, this.categories);
 
-  factory ProjectImpl.fromJsonString(string){
-    return new JsonObject.fromJsonString(string, new ProjectImpl());
+  Project.create(hash) : hash = hash, name = "New Project",categories = [];
+
+  Project.empty() {
+    categories = [];
+  }
+
+  factory Project.fromJsonString(string){
+    return new Dartson.JSON().map(string, new Project.empty());
   }
 
   toString() => name;
 
 }
 
-abstract class Category extends Observable {
-  /** Not documented yet. */
-  final core.int id;
-
-  /** Not documented yet. */
-  core.String name = "New category";
-
-  /** Not documented yet. */
-  @observable core.List<core.String> subcategories = toObservable([]);
-}
-
-
 /** Not documented yet. */
-class CategoryImpl extends JsonObject with Observable implements Category {
+@Entity()
+class Category extends Observable{
+  /** Not documented yet. */
+  final int id;
 
-  //CategoryImpl();
+  /** Not documented yet. */
+  String name = "New category";
 
-  CategoryImpl(this.id, this.name, this.subcategories);
-  CategoryImpl.create() : id = null, name = "New", subcategories = toObservable([]);
+  /** Not documented yet. */
+  @Property(ignore:true)
+  @observable List<String> subcategories = toObservable([]);
 
-  factory CategoryImpl.fromJsonString(string){
-    return new JsonObject.fromJsonString(string, new CategoryImpl());
+  Category(this.id, this.name, this.subcategories);
+  Category.create() : id = null, name = "New", subcategories = toObservable([]);
+
+  Category.empty();
+
+  factory Category.fromJsonString(string){
+    return new Dartson.JSON().map(string, new Category.empty());
   }
 
   toString() => name;
