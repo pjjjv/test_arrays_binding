@@ -2,14 +2,22 @@
 import 'package:polymer/polymer.dart';
 import 'package:test_arrays_binding/model_project.dart';
 import 'dart:html';
+import 'dart:js';
+import 'package:firebase/firebase.dart';
 
 @CustomTag("pane-edit")
 class PaneEdit extends PolymerElement {
   PaneEdit.created() : super.created() {
-    Category cat = toObservable(new Category(0, "catA", toObservable([])));
-    cat.subcategories.add(toObservable("subcatA"));
-    project = toObservable(new Project.create("bla"));
-    project.categories.add(toObservable(cat));
+//    Category cat = toObservable(new Category(0, "catA", toObservable([])));
+//    cat.subcategories.add(toObservable("subcatA"));
+//    project = toObservable(new Project.create("bla"));
+//    project.categories.add(toObservable(cat));
+
+    Firebase dbRef = new Firebase("https://shining-heat-1634.firebaseio.com/");
+
+    dbRef.child("project").onValue.listen((e) {
+      project = new ProjectImpl.fromJsonString(e.snapshot.valAsJson());
+    });
   }
 
   @observable Project project;

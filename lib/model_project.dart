@@ -2,10 +2,9 @@ library test_arrays_binding.model_project;
 
 import 'package:polymer/polymer.dart';
 import "dart:core" as core;
+import "package:json_object/json_object.dart";
 
-
-/** Not documented yet. */
-class Project extends Observable {
+abstract class Project extends Observable {
   /** Not documented yet. */
   @observable core.String hash;
 
@@ -14,20 +13,27 @@ class Project extends Observable {
 
   /** Not documented yet. */
   @observable core.List<Category> categories = toObservable([]);
+}
 
 
-  Project(this.hash, this.name, this.categories);
+/** Not documented yet. */
+class ProjectImpl extends JsonObject with Observable implements Project{
 
-  Project.create(hash) : hash = hash, name = "New Project",categories = toObservable([]);
+  ProjectImpl();
 
+  ProjectImpl.full(this.hash, this.name, this.categories);
+
+  ProjectImpl.create(hash) : hash = hash, name = "New Project",categories = toObservable([]);
+
+  factory ProjectImpl.fromJsonString(string){
+    return new JsonObject.fromJsonString(string, new ProjectImpl());
+  }
 
   toString() => name;
 
 }
 
-
-/** Not documented yet. */
-class Category extends Observable {
+abstract class Category extends Observable {
   /** Not documented yet. */
   final core.int id;
 
@@ -36,9 +42,20 @@ class Category extends Observable {
 
   /** Not documented yet. */
   @observable core.List<core.String> subcategories = toObservable([]);
+}
 
-  Category(this.id, this.name, this.subcategories);
-  Category.create() : id = null, name = "New", subcategories = toObservable([]);
+
+/** Not documented yet. */
+class CategoryImpl extends JsonObject with Observable implements Category {
+
+  //CategoryImpl();
+
+  CategoryImpl(this.id, this.name, this.subcategories);
+  CategoryImpl.create() : id = null, name = "New", subcategories = toObservable([]);
+
+  factory CategoryImpl.fromJsonString(string){
+    return new JsonObject.fromJsonString(string, new CategoryImpl());
+  }
 
   toString() => name;
 
