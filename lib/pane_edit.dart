@@ -59,8 +59,8 @@ class PaneEdit extends PolymerElement {
 
 @Entity()
 class EntityClass extends Observable{
-  //@Property(name:"name")
-  //@observable String name;
+  @Property(name:"name")
+  @observable String name;
   String _setted;
 
   @Property(name:"renamed")
@@ -73,12 +73,6 @@ class EntityClass extends Observable{
 
   set setted(String s) => _setted = s;
   String get setted => _setted;
-
-  String _name;
-  String get name => _name;
-  void set name(String value) {
-    this._name = notifyPropertyChange(const Symbol('name'), this._name, value);
-  }
 
   EntityClass();
 
