@@ -7,33 +7,28 @@ import 'package:dartson/dartson.dart';
 @Entity()
 class Project extends Observable{
   /** Not documented yet. */
-  @Property(ignore:true)
   @observable String hash;
 
   /** Not documented yet. */
-  @Property(ignore:true)
   @observable String name = "New Project";
 
-  String names;
-
-  @Property(ignore:true)
-  @observable List<Category> categories = toObservable([]);
   /** Not documented yet. */
-  /*List<Category> _categories = toObservable([]);
+  List<Category> _categories = toObservable([]);
   List<Category> get categories => _categories;
   void set categories(List<Category> value) {
     this._categories = notifyPropertyChange(const Symbol('categories'), this._categories, toObservable(value));
-  }*/
+  }
 
-  //Project(this.hash, this.name, this.categories);
+  Project(this.hash, this.name, this.categories);
 
-  //Project.create(hash) : hash = hash, name = "New Project", categories = [];
+  Project.create(hash) : hash = hash, name = "New Project",categories = [];
 
-  Project(): names = "bla";
+  Project.empty() {
+    categories = [];
+  }
 
   factory Project.fromJsonString(string){
-    Project p = new Dartson.JSON().map({"names":"test"}, new Project());
-    return p;
+    return new Dartson.JSON().map(string, new Project.empty());
   }
 
   toString() => name;
