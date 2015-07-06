@@ -19,14 +19,14 @@ abstract class ProjectInterface extends Observable {
 /** Not documented yet. */
 class Project extends JsonObject implements ProjectInterface{
 
-  Project.empty();
+  Project();
 
   Project.full(this.hash, this.name, this.categories);
 
   Project.create(hash) : hash = hash, name = "New Project",categories = toObservable([]);
 
   factory Project.fromJsonString(string){
-    Project p = new JsonObject.fromJsonString(string, new Project.empty());
+    Project p = new JsonObject.fromJsonString(string, new Project());
     return p;
   }
 
