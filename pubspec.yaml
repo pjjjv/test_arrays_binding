@@ -8,9 +8,10 @@ dependencies:
   #firebase: '>=0.5.1 <0.6.0'
   firebase:
     path: ../firebase-dart
+  dartson: "^0.2.3"
   paper_elements: '>=0.7.0 <0.8.0'
   polymer: '>=0.16.0 <0.17.0'
-  json_object: '>=1.0.19 <1.1.0'
 transformers:
 - polymer:
     entry_points: web/index.html
+- dartson
