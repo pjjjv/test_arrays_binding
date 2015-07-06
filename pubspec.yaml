@@ -12,6 +12,6 @@ dependencies:
   paper_elements: '>=0.7.0 <0.8.0'
   polymer: '>=0.16.0 <0.17.0'
 transformers:
+- dartson #has to be before polymer or observables won't work
 - polymer:
     entry_points: web/index.html
-- dartson

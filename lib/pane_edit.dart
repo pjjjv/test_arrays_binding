@@ -31,18 +31,18 @@ class PaneEdit extends PolymerElement {
   }
 
 
-  void addCategory(Event e, var detail, Node target){
+  void addCategory(var e, var detail, Node target){
     project.categories.add(toObservable(new Category.create()));
   }
 
-  void onCycle(Event e, var detail, Node target){
+  void onCycle(var e, var detail, Node target){
     category_nr++;
     if (category_nr >= project.categories.length){
       category_nr = 0;
     }
   }
 
-  void addSubCategory(Event e, var detail, Node target){
+  void addSubCategory(var e, var detail, Node target){
     project.categories[category_nr].subcategories.add(toObservable("subcatNew"));
   }
 
